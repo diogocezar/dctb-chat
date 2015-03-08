@@ -1,0 +1,5 @@
+<IfModule mod_rewrite.c>
+	RewriteEngine On
+	RewriteRule ^chat/([a-zA-Z0-9_-]+)$ ./app/Chat.php?method=$1
+	RewriteRule ^chat/([a-zA-Z0-9_-]+)/$ ./app/Chat.php?method=$1
+</IfModule>
