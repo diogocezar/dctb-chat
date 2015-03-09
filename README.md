@@ -12,4 +12,11 @@ Developed an option to use NodeJS.
 
 * Client: _/js/objwcts/public/nodeClient.js_
 * Server: _/js/nodeServer.js_
+
+To enable/disable NodeJS, just change the flag at line 11:
+
+```
+nodejs : false, //disabled
+```
+
 Enjoy~
