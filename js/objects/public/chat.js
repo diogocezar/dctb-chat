@@ -5,10 +5,11 @@
 *   Year: 2015
 */
 Chat = {
-	instanse : false,
-	state    : 0,
-	nick     : null,
-	nodejs   : false,
+	instanse  : false,
+	state     : 0,
+	nick      : null,
+	nodejs    : false,
+	timeout   : 2000,
 	init: function(){
 		if(!Chat.nodejs){
 			Chat.getState();
@@ -85,7 +86,6 @@ Chat = {
 				}
 				else{
 					$(this).val(text.substring(0, maxLength));
-
 				}	
 			}	
 		});
@@ -112,20 +112,27 @@ Chat = {
 	history: function(){
 		if(!Chat.instanse){
 			Chat.instanse = true;
+			var file = "php";
+			if(Chat.nodejs)
+				file = "nodejs"
 	     	$.ajax({
 				type: "POST",
 			   	url : "chat/getHistory",
 			   	data: {  
-			   		'state'    : Chat.state
+			   		'state'    : Chat.state,
+			   		'file'     : file
 				},
 			   	dataType: "json",
 			   	success: function(data){
+			   		var newMsgs = false;
+			   		var obj     = $('#chat-area');
 					if(data.text){
-						for(var i = 0; i < data.text.length; i++) {
-                        	$('#chat-area').append($("<p>"+ data.text[i] +"</p>"));
+						for(var i = 0; i < data.text.length; i++){
+                        	obj.append($("<p>"+ Emoticons.replace(data.text[i]) + "</p>"));
                         }								  
 				   	}
-				   	document.getElementById('chat-area').scrollTop = document.getElementById('chat-area').scrollHeight;
+				   	if(newMsgs)
+				   		document.getElementById('chat-area').scrollTop = document.getElementById('chat-area').scrollHeight;
 				   	Chat.instanse = false;
 			   	},
 			});
@@ -144,10 +151,15 @@ Chat = {
 				   	dataType: "json",
 				   	success: function(data){
 				   		var newMsgs = false;
+				   		var obj     = $('#chat-area');
 						if(data.text){
 							for(var i = 0; i < data.text.length; i++) {
 								newMsgs = true;
-	                        	$('#chat-area').append($("<p>"+ data.text[i] +"</p>"));
+								text = data.text[i];
+	                        	obj.append($("<p>" + Emoticons.replace(data.text[i]) + "</p>"));
+	                        	var index_cut = text.lastIndexOf('</span>');
+	                        	var only_text = text.slice(index_cut+7, text.length-1);
+	                        	Commands.check(only_text, obj);
 	                        }								  
 					   	}
 					   	if(newMsgs)
@@ -181,23 +193,6 @@ Chat = {
     			'nickname' : Chat.nick
     		})
     	}
-	},
-	getDate: function(date){
-    	var d = new Date(date || Date.now()),
-        	month = '' + (d.getMonth() + 1),
-        	day = '' + d.getDate(),
-        	year = d.getFullYear();
-        	hour = '' + d.getHours();
-        	min  = '' + d.getMinutes();
-        	sec  = '' + d.getSeconds();
-
-    	if (month.length < 2) month = '0' + month;
-    	if (day.length < 2) day = '0' + day;
-    	if (hour.length < 2) hour = '0' + hour;
-    	if (min.length < 2) min = '0' + min;
-    	if (sec.length < 2) sec = '0' + sec; 
-
-    	return [day, month, year].join('/') + ' ' + [hour, min, sec].join(':');
 	}
 }
 
@@ -208,5 +203,5 @@ $(window).resize(function() {
 $(document).ready(function() {
 	Chat.init();
 	if(!Chat.nodejs)
-		setInterval(function() { Chat.update() }, 2000);
+		setInterval(function() { Chat.update() }, Chat.timeout);
 });

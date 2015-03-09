@@ -120,7 +120,7 @@
                 if(preg_match($reg_exUrl, $message, $url)){
                     $message = preg_replace($reg_exUrl, '<a href="'.$url[0].'" target="_blank">'.$url[0].'</a>', $message);
                 }
-                if(fwrite(fopen($file, 'a'), "<span class=\"date\">". date('d/m/Y H:i:s') . "</span>" . "<span>". $nickname . "</span>" . $message = str_replace("\n", " ", $message) . "\n"))
+                if(fwrite(fopen($file, 'a'), "<span class=\"span-chat date\">". date('d/m/Y H:i:s') . "</span>" . "<span class=\"span-chat\">". $nickname . "</span>" . $message = str_replace("\n", " ", $message) . "\n"))
                     echo "{\"success\":\"true\"}";
                 else
                     echo "{\"success\":\"false\"}";

@@ -5,7 +5,7 @@
 *   Year: 2015
 */
 NodeClient = {
-	host   : 'localhost',
+	host   : '11.1.1.40',
 	port   : '8080',
 	socket : null,
 	init : function(){
@@ -17,11 +17,11 @@ NodeClient = {
 	on : function(obj){
 		NodeClient.socket.on('message', function(data){
 			NodeClient.save(data.nickname, data.message);
-			var actualContent = obj.html();
-			var date = Chat.getDate();
-			var newMsgContent = '<p><span class="date">' + date + '</span> <span>' + data.nickname + '</span> ' + data.message + '</p>';
-			var content = newMsgContent + actualContent;
-			obj.html(content);
+			var date = Util.getDate();
+			obj.append('<p><span class="span-chat date">' + date + '</span> <span class="span-chat">' + data.nickname + '</span> ' + Emoticons.replace(data.message) + '</p>');
+			Commands.check(data.message, obj);
+			document.getElementById('chat-area').scrollTop = document.getElementById('chat-area').scrollHeight;
+
 		});
 	},
 	save: function(nickname, message){

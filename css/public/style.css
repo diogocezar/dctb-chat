@@ -1,19 +1,23 @@
 *                               { margin: 0; padding: 0; }
-body                            { font: 12px "Lucida Grande", Sans-Serif; background: url(../../images/bg.png); }
+body                            { font-family: 'Roboto', sans-serif; font-size: 0.8em; background: url(../../images/bg.png); }
 h2                              { color: #fa9f00; font: 30px Helvetica, Sans-Serif; margin: 0 0 10px 0; }
 #page-wrap                      { position: relative; padding-left: 30px; padding-right: 30px; padding-top: 20px; }
 #message-wrap                   { position: relative; padding-left: 30px; padding-right: 30px; }
 
 #chat-wrap                      { border: 1px solid #eee; margin: 0 0 15px 0; }
 #chat-area                      { overflow: auto; padding: 30px; background: #DCDCDC; padding-top: 40px; padding-bottom: 40px; }
-#chat-area span                 { color: white; background: #3C3C3C; padding: 4px 8px; -moz-border-radius: 5px; -webkit-border-radius: 8px; margin: 0 5px 0 0; }
-#chat-area p                    { padding: 15px 0; border-bottom: 1px solid #ccc; }
-
-#name-area                      { position: absolute; top: 12px; right: 0; color: white; font: bold 12px "Lucida Grande", Sans-Serif; text-align: right; }   
-#name-area span                 { color: #fa9f00; }
+#chat-area p                    { padding-top: 15px; padding-bottom: 10px; border-bottom: 1px solid #ccc; }
 
 #send-message-area p            { float: left; color: white; padding-top: 27px; font-size: 14px; }
 #chat                           { border: 0px; width: 100%; padding-top: 15px; background: #DCDCDC; text-indent: 10px; }
+
+textarea{
+	font-family: 'Roboto', sans-serif; font-size: 1em;
+}
+
+.span-chat{
+	color: white; background: #3C3C3C; padding: 4px 8px; -moz-border-radius: 5px; -webkit-border-radius: 8px; margin: 0 5px 0 0;
+}
 
 #nick-wrap{
 	height: 100%;
@@ -48,5 +52,9 @@ h2                              { color: #fa9f00; font: 30px Helvetica, Sans-Ser
 .date{
 	clear: both;
 	font-size: 65%;
-	background-color: black;
+}
+
+.admin{
+	background-color:#C7C7C7!important;
+	color:#000;
 }
