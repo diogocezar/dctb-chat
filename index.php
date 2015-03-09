@@ -25,5 +25,7 @@
     <script src="js/libs/easing/easing.min.js"></script>
     <script src="js/libs/nice.scroll/nice.scroll.min.js"></script>
     <script src="js/libs/mouse.wheel/mouse.wheel.min.js"></script>
+    <script src="js/node_modules/socket.io/node_modules/socket.io-client/dist/socket.io.js"></script>
+    <script src="js/objects/public/nodeClient.js"></script>
     <script src="js/objects/public/chat.js"></script>
 </html>

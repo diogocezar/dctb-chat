@@ -8,8 +8,15 @@ Chat = {
 	instanse : false,
 	state    : 0,
 	nick     : null,
+	nodejs   : false,
 	init: function(){
-		Chat.getState();
+		if(!Chat.nodejs){
+			Chat.getState();
+		}
+		else{
+			NodeClient.init();
+			NodeClient.on($('#chat-area'));
+		}
 		Chat.getNick();
 		Chat.resize();
 		Chat.keys();
@@ -125,48 +132,72 @@ Chat = {
 	 	}
 	},
 	update: function(){
-		if(!Chat.instanse){
-			Chat.instanse = true;
-	     	$.ajax({
-				type: "POST",
-			   	url : "chat/update",
-			   	data: {
-					'state'    : Chat.state
-				},
-			   	dataType: "json",
-			   	success: function(data){
-			   		var newMsgs = false;
-					if(data.text){
-						for(var i = 0; i < data.text.length; i++) {
-							newMsgs = true;
-                        	$('#chat-area').append($("<p>"+ data.text[i] +"</p>"));
-                        }								  
-				   	}
-				   	if(newMsgs)
-				   		document.getElementById('chat-area').scrollTop = document.getElementById('chat-area').scrollHeight;
-				   	Chat.instanse = false;
-				   	Chat.state    = data.state;
-			   	},
-			});
-	 	}
-	 	else{
-			setTimeout(Chat.update, 1500);
-	 	}
+		if(!Chat.nodejs){
+			if(!Chat.instanse){
+				Chat.instanse = true;
+		     	$.ajax({
+					type: "POST",
+				   	url : "chat/update",
+				   	data: {
+						'state'    : Chat.state
+					},
+				   	dataType: "json",
+				   	success: function(data){
+				   		var newMsgs = false;
+						if(data.text){
+							for(var i = 0; i < data.text.length; i++) {
+								newMsgs = true;
+	                        	$('#chat-area').append($("<p>"+ data.text[i] +"</p>"));
+	                        }								  
+					   	}
+					   	if(newMsgs)
+					   		document.getElementById('chat-area').scrollTop = document.getElementById('chat-area').scrollHeight;
+					   	Chat.instanse = false;
+					   	Chat.state    = data.state;
+				   	},
+				});
+		 	}
+		}
 	},
 	send: function(message, nickname){
 		Chat.update();
-    	$.ajax({
-			type: "POST",
-		   	url : "chat/send",
-		   	data: {  
-					'message'  : message,
-					'nickname' : Chat.nick,
-			},
-		   	dataType: "json",
-		   	success: function(data){
-				Chat.update();
-		   	},
-		});
+		if(!Chat.nodejs){
+	    	$.ajax({
+				type: "POST",
+			   	url : "chat/send",
+			   	data: {  
+						'message'  : message,
+						'nickname' : Chat.nick,
+				},
+			   	dataType: "json",
+			   	success: function(data){
+					Chat.update();
+			   	},
+			});
+    	}
+    	else{
+    		NodeClient.emit({
+    			'message'  : message,
+    			'nickname' : Chat.nick
+    		})
+    	}
+	},
+	getDate: function(date){
+    	var d = new Date(date || Date.now()),
+        	month = '' + (d.getMonth() + 1),
+        	day = '' + d.getDate(),
+        	year = d.getFullYear();
+        	hour = '' + d.getHours();
+        	min  = '' + d.getMinutes();
+        	sec  = '' + d.getSeconds();
+
+    	if (month.length < 2) month = '0' + month;
+    	if (day.length < 2) day = '0' + day;
+    	if (hour.length < 2) hour = '0' + hour;
+    	if (min.length < 2) min = '0' + min;
+    	if (sec.length < 2) sec = '0' + sec; 
+
+    	return [day, month, year].join('/') + ' ' + [hour, min, sec].join(':');
 	}
 }
 
@@ -176,5 +207,6 @@ $(window).resize(function() {
 
 $(document).ready(function() {
 	Chat.init();
-	setInterval(function() { Chat.update() }, 2000);
+	if(!Chat.nodejs)
+		setInterval(function() { Chat.update() }, 2000);
 });

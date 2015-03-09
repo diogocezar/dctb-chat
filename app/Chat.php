@@ -8,9 +8,14 @@
     Class Chat{
 
         /**
-        * Attrivute to store chat conversation
+        * Attrivute to store normal chat conversation
         */
-        private $file = "../data/chat.txt";
+        private $file_php = "../data/chat_php.txt";
+
+        /**
+        * Attrivute to store nodejs chat conversation
+        */
+        private $file_node = "../data/chat_nodejs.txt";
 
         /**
         * Number of history conversations to restore
@@ -39,11 +44,11 @@
         private function __construct(){}
 
         /**
-        * Method to return the number of lines in file
+        * Method to return the number of lines in file_php
         */
         public function getState(){
-            if(file_exists($this->file)){
-                $lines = file($this->file);
+            if(file_exists($this->file_php)){
+                $lines = file($this->file_php);
             }
             $return['state'] = count($lines);
             echo json_encode($return);
@@ -58,8 +63,8 @@
                 $history = $_POST['history'];
             else
                 $history = $this->history;
-            if(file_exists($this->file)){
-               $lines = file($this->file);
+            if(file_exists($this->file_php)){
+               $lines = file($this->file_php);
             }
             $count = count($lines);
             if($history > $count){
@@ -80,8 +85,8 @@
         */
         public function update(){
             $state = $_POST['state'];
-            if(file_exists($this->file)){
-               $lines = file($this->file);
+            if(file_exists($this->file_php)){
+               $lines = file($this->file_php);
             }
             $count = count($lines);
             if($state == $count){
@@ -104,6 +109,10 @@
         * Method to send a message
         */
         public function send(){
+            $file      = $this->file_php;
+            if(!empty($_POST['file'])){
+                $file = "../data/chat_" . $_POST['file'] . ".txt";
+            }
             $nickname  = htmlentities(strip_tags($_POST['nickname']));
             $reg_exUrl = "/(http|https|ftp|ftps)\:\/\/[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}(\/\S*)?/";
             $message   = htmlentities(strip_tags($_POST['message']));
@@ -111,13 +120,12 @@
                 if(preg_match($reg_exUrl, $message, $url)){
                     $message = preg_replace($reg_exUrl, '<a href="'.$url[0].'" target="_blank">'.$url[0].'</a>', $message);
                 }
-                if(fwrite(fopen($this->file, 'a'), "<span class=\"date\">". date('d/m/Y H:i:s') . "</span>" . "<span>". $nickname . "</span>" . $message = str_replace("\n", " ", $message) . "\n"))
+                if(fwrite(fopen($file, 'a'), "<span class=\"date\">". date('d/m/Y H:i:s') . "</span>" . "<span>". $nickname . "</span>" . $message = str_replace("\n", " ", $message) . "\n"))
                     echo "{\"success\":\"true\"}";
                 else
                     echo "{\"success\":\"false\"}";
             }
         }
-
     }
     if(isset($_GET['method'])){
         $method = $_GET['method'];
