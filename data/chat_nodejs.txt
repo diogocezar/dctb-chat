@@ -1,0 +1,78 @@
+<span class="span-chat date">09/03/2015 13:25:52</span><span class="span-chat"></span>oi 
+<span class="span-chat date">09/03/2015 13:29:05</span><span class="span-chat"></span>oi 
+<span class="span-chat date">09/03/2015 13:29:09</span><span class="span-chat"></span>www.diogocezar.com 
+<span class="span-chat date">09/03/2015 13:29:15</span><span class="span-chat"></span><a href="http://www.diogocezar.com" target="_blank">http://www.diogocezar.com</a> 
+<span class="span-chat date">09/03/2015 13:29:54</span><span class="span-chat">diogo</span><a href="http://www.diogocezar.com" target="_blank">http://www.diogocezar.com</a> 
+<span class="span-chat date">09/03/2015 13:31:07</span><span class="span-chat">diogo</span><a href="http://www.globo.com" target="_blank">http://www.globo.com</a> 
+<span class="span-chat date">09/03/2015 13:31:09</span><span class="span-chat">diogo</span>ok 
+<span class="span-chat date">09/03/2015 13:31:28</span><span class="span-chat">oi</span>oi 
+<span class="span-chat date">09/03/2015 13:31:34</span><span class="span-chat">oi</span><a href="http://www.diogocezar.com" target="_blank">http://www.diogocezar.com</a> 
+<span class="span-chat date">09/03/2015 13:31:40</span><span class="span-chat">oi</span>:P 
+<span class="span-chat date">09/03/2015 13:31:45</span><span class="span-chat">oi</span>/? 
+<span class="span-chat date">09/03/2015 13:31:49</span><span class="span-chat">oi</span>/smiles 
+<span class="span-chat date">09/03/2015 13:31:54</span><span class="span-chat">oi</span>(pizza) 
+<span class="span-chat date">09/03/2015 13:33:12</span><span class="span-chat">diogo</span>ol&aacute; 
+<span class="span-chat date">09/03/2015 13:33:17</span><span class="span-chat">diogo</span>www.globo.com 
+<span class="span-chat date">09/03/2015 14:14:24</span><span class="span-chat">oi</span>1 
+<span class="span-chat date">09/03/2015 14:14:25</span><span class="span-chat">oi</span>2 
+<span class="span-chat date">09/03/2015 14:14:26</span><span class="span-chat">oi</span>3 
+<span class="span-chat date">09/03/2015 14:14:26</span><span class="span-chat">oi</span>4 
+<span class="span-chat date">09/03/2015 14:14:26</span><span class="span-chat">oi</span>5 
+<span class="span-chat date">09/03/2015 14:14:26</span><span class="span-chat">oi</span>6 
+<span class="span-chat date">09/03/2015 14:14:27</span><span class="span-chat">oi</span>7 
+<span class="span-chat date">09/03/2015 14:14:27</span><span class="span-chat">oi</span>8 
+<span class="span-chat date">09/03/2015 14:14:27</span><span class="span-chat">oi</span>9 9
+<span class="span-chat date">09/03/2015 14:14:27</span><span class="span-chat">oi</span> 9
+<span class="span-chat date">09/03/2015 14:14:28</span><span class="span-chat">oi</span>9 
+<span class="span-chat date">09/03/2015 14:14:28</span><span class="span-chat">oi</span>9 9
+<span class="span-chat date">09/03/2015 14:14:28</span><span class="span-chat">oi</span> 9
+<span class="span-chat date">09/03/2015 14:14:28</span><span class="span-chat">oi</span> 8
+<span class="span-chat date">09/03/2015 14:14:29</span><span class="span-chat">oi</span> 87
+<span class="span-chat date">09/03/2015 14:14:29</span><span class="span-chat">oi</span> 76
+<span class="span-chat date">09/03/2015 14:14:29</span><span class="span-chat">oi</span>5 
+<span class="span-chat date">09/03/2015 14:14:29</span><span class="span-chat">oi</span>4 3
+<span class="span-chat date">09/03/2015 14:15:37</span><span class="span-chat">kkk</span>a 
+<span class="span-chat date">09/03/2015 14:15:37</span><span class="span-chat">kkk</span>a 
+<span class="span-chat date">09/03/2015 14:15:37</span><span class="span-chat">kkk</span>a 
+<span class="span-chat date">09/03/2015 14:15:37</span><span class="span-chat">kkk</span>a 
+<span class="span-chat date">09/03/2015 14:15:37</span><span class="span-chat">kkk</span>a 
+<span class="span-chat date">09/03/2015 14:15:38</span><span class="span-chat">kkk</span>a 
+<span class="span-chat date">09/03/2015 14:15:38</span><span class="span-chat">kkk</span>a 
+<span class="span-chat date">09/03/2015 14:15:38</span><span class="span-chat">kkk</span>a 
+<span class="span-chat date">09/03/2015 14:15:38</span><span class="span-chat">kkk</span>a 
+<span class="span-chat date">09/03/2015 14:15:38</span><span class="span-chat">kkk</span>a 
+<span class="span-chat date">09/03/2015 14:15:39</span><span class="span-chat">kkk</span>a 
+<span class="span-chat date">09/03/2015 14:15:39</span><span class="span-chat">kkk</span>a 
+<span class="span-chat date">09/03/2015 14:15:39</span><span class="span-chat">kkk</span>a 
+<span class="span-chat date">09/03/2015 14:15:39</span><span class="span-chat">kkk</span>a 
+<span class="span-chat date">09/03/2015 14:15:39</span><span class="span-chat">kkk</span>a 
+<span class="span-chat date">09/03/2015 14:15:40</span><span class="span-chat">kkk</span>a a
+<span class="span-chat date">09/03/2015 14:15:40</span><span class="span-chat">kkk</span> a
+<span class="span-chat date">09/03/2015 14:15:40</span><span class="span-chat">kkk</span> a
+<span class="span-chat date">09/03/2015 14:15:40</span><span class="span-chat">kkk</span>a 
+<span class="span-chat date">09/03/2015 14:15:40</span><span class="span-chat">kkk</span>a 
+<span class="span-chat date">09/03/2015 14:15:41</span><span class="span-chat">kkk</span>a 
+<span class="span-chat date">09/03/2015 14:15:41</span><span class="span-chat">kkk</span>a 
+<span class="span-chat date">09/03/2015 14:15:41</span><span class="span-chat">kkk</span>a 
+<span class="span-chat date">09/03/2015 14:15:41</span><span class="span-chat">kkk</span>a 
+<span class="span-chat date">09/03/2015 14:15:41</span><span class="span-chat">kkk</span>a 
+<span class="span-chat date">09/03/2015 14:15:42</span><span class="span-chat">kkk</span>a 
+<span class="span-chat date">09/03/2015 14:15:42</span><span class="span-chat">kkk</span>a 
+<span class="span-chat date">09/03/2015 14:15:42</span><span class="span-chat">kkk</span>a 
+<span class="span-chat date">09/03/2015 14:15:42</span><span class="span-chat">kkk</span>a 
+<span class="span-chat date">09/03/2015 14:15:42</span><span class="span-chat">kkk</span>a 
+<span class="span-chat date">09/03/2015 14:27:44</span><span class="span-chat">diogo</span>teste 
+<span class="span-chat date">09/03/2015 14:27:55</span><span class="span-chat">Jailson</span>Oi! 
+<span class="span-chat date">09/03/2015 14:27:58</span><span class="span-chat">Jailson</span>Ol&aacute;! 
+<span class="span-chat date">09/03/2015 14:28:00</span><span class="span-chat">fff</span>opa 
+<span class="span-chat date">09/03/2015 14:28:08</span><span class="span-chat">diogo</span>Ol&aacute;. 
+<span class="span-chat date">09/03/2015 14:28:08</span><span class="span-chat">Jailson</span>Tchudu bom? 
+<span class="span-chat date">09/03/2015 14:28:12</span><span class="span-chat">diogo</span>tudo :) 
+<span class="span-chat date">09/03/2015 14:28:18</span><span class="span-chat">diogo</span>/? 
+<span class="span-chat date">09/03/2015 14:28:19</span><span class="span-chat">Jailson</span>Que del&iacute;cia cara! 
+<span class="span-chat date">09/03/2015 14:28:30</span><span class="span-chat">Jailson</span>/smiles 
+<span class="span-chat date">09/03/2015 14:28:46</span><span class="span-chat">Jailson</span>(tmi) 
+<span class="span-chat date">09/03/2015 14:29:37</span><span class="span-chat">Jailson</span>Ai gata tem (skype) ? 
+<span class="span-chat date">09/03/2015 14:29:42</span><span class="span-chat">Jailson</span>Rriairairia 
+<span class="span-chat date">09/03/2015 14:30:45</span><span class="span-chat">diogo</span>uAEHUEAHAEUh 
+<span class="span-chat date">09/03/2015 14:31:43</span><span class="span-chat">oi</span>oi 

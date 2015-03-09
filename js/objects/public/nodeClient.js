@@ -5,7 +5,7 @@
 *   Year: 2015
 */
 NodeClient = {
-	host   : '11.1.1.40',
+	host   : 'diogocezar.com.br',
 	port   : '8080',
 	socket : null,
 	init : function(){
@@ -18,11 +18,24 @@ NodeClient = {
 		NodeClient.socket.on('message', function(data){
 			NodeClient.save(data.nickname, data.message);
 			var date = Util.getDate();
-			obj.append('<p><span class="span-chat date">' + date + '</span> <span class="span-chat">' + data.nickname + '</span> ' + Emoticons.replace(data.message) + '</p>');
-			Commands.check(data.message, obj);
+			var text = data.message;
+			var nickname = data.nickname;
+			text = NodeClient.replaces(text);
+			text = Emoticons.replaces(text);
+			if(!Commands.isCommand(text))
+				obj.append('<p><span class="span-chat date">' + date + '</span> <span class="span-chat">' + nickname + '</span> ' + text + '</p>');
+			if(nickname == Chat.nickname)
+				Commands.check(data.message, obj);
 			document.getElementById('chat-area').scrollTop = document.getElementById('chat-area').scrollHeight;
 
 		});
+	},
+	replaces: function(text){
+		var return_text = "";
+		return_text = Util.stripTags(text);
+		return_text = Util.escapeHtmlEntities(return_text);
+		return_text = Util.formatUrl(return_text);
+		return return_text;
 	},
 	save: function(nickname, message){
 		$.ajax({
@@ -31,7 +44,7 @@ NodeClient = {
 		   	data: {  
 		   		'nickname' : nickname,
 		   		'message'  : message,
-		   		'file'     : 'nodejs'
+		   		'type'     : 'nodejs'
 			},
 		   	dataType: "json"
 		});

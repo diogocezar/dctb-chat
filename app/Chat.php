@@ -7,15 +7,20 @@
     */
     Class Chat{
 
-        /**
-        * Attrivute to store normal chat conversation
-        */
-        private $file_php = "../data/chat_php.txt";
+    	/**
+    	* Attribute to store type of chat
+    	*/
+    	private $chat_type = null;
 
         /**
-        * Attrivute to store nodejs chat conversation
+        * Attribute to store chat conversation
         */
-        private $file_node = "../data/chat_nodejs.txt";
+        private $file = null;
+
+        /**
+        * Attribute to users
+        */
+        private $file_nicks = "../data/chat_users.txt";
 
         /**
         * Number of history conversations to restore
@@ -43,12 +48,25 @@
         */
         private function __construct(){}
 
+        public function setFile(){
+        	if($this->chat_type == "php"){
+        		$this->file = "../data/chat_php.txt";
+        	}
+        	else{
+        		$this->file = "../data/chat_nodejs.txt";
+        	}
+        }
+
         /**
         * Method to return the number of lines in file_php
         */
         public function getState(){
-            if(file_exists($this->file_php)){
-                $lines = file($this->file_php);
+        	$this->chat_type = "php";
+        	if(!empty($_POST['type']))
+        		$this->chat_type = $_POST['type'];
+        	$this->setFile();
+            if(file_exists($this->file)){
+                $lines = file($this->file);
             }
             $return['state'] = count($lines);
             echo json_encode($return);
@@ -58,13 +76,17 @@
         * Method to return the history of chat
         */
         public function getHistory(){
-            $state   = $_POST['state'];
+			$this->chat_type = "php";
+        	if(!empty($_POST['type']))
+        		$this->chat_type = $_POST['type'];
+        	$this->setFile();
+            $state = $_POST['state'];
             if(!empty($_POST['history']))
                 $history = $_POST['history'];
             else
                 $history = $this->history;
-            if(file_exists($this->file_php)){
-               $lines = file($this->file_php);
+            if(file_exists($this->file)){
+               $lines = file($this->file);
             }
             $count = count($lines);
             if($history > $count){
@@ -76,7 +98,7 @@
                     $text[] =  $line = str_replace("\n", "", $line);
                 }
             }
-            $return['text'] = $text; 
+            $return['text'] = $text;
             echo json_encode($return);
         }
 
@@ -84,9 +106,13 @@
         * Method to update chat
         */
         public function update(){
+			$this->chat_type = "php";
+        	if(!empty($_POST['type']))
+        		$this->chat_type = $_POST['type'];
+        	$this->setFile();
             $state = $_POST['state'];
-            if(file_exists($this->file_php)){
-               $lines = file($this->file_php);
+            if(file_exists($this->file)){
+               $lines = file($this->file);
             }
             $count = count($lines);
             if($state == $count){
@@ -109,10 +135,11 @@
         * Method to send a message
         */
         public function send(){
-            $file      = $this->file_php;
-            if(!empty($_POST['file'])){
-                $file = "../data/chat_" . $_POST['file'] . ".txt";
-            }
+			$this->chat_type = "php";
+        	if(!empty($_POST['type']))
+        		$this->chat_type = $_POST['type'];
+        	$this->setFile();
+            $file = $this->file;
             $nickname  = htmlentities(strip_tags($_POST['nickname']));
             $reg_exUrl = "/(http|https|ftp|ftps)\:\/\/[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}(\/\S*)?/";
             $message   = htmlentities(strip_tags($_POST['message']));

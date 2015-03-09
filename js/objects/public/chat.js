@@ -7,25 +7,28 @@
 Chat = {
 	instanse  : false,
 	state     : 0,
-	nick      : null,
+	nickname  : null,
 	nodejs    : false,
 	timeout   : 2000,
 	init: function(){
-		if(!Chat.nodejs){
-			Chat.getState();
-		}
-		else{
-			NodeClient.init();
-			NodeClient.on($('#chat-area'));
-		}
 		Chat.getNick();
 		Chat.resize();
 		Chat.keys();
 		Chat.setNiceScroll();
+		Chat.getState();
+		if(Chat.nodejs){
+			NodeClient.init();
+			NodeClient.on($('#chat-area'));
+		}
+	},
+	getChatType: function(){
+		if(Chat.nodejs)
+			return 'nodejs'
+		else
+			return 'php';
 	},
 	setNiceScroll: function(){
-		$('#chat-area').niceScroll(
-        {
+		$('#chat-area').niceScroll({
             cursorwidth: '8px',
             zindex: 99999999,
             scrollspeed: 90,
@@ -53,7 +56,7 @@ Chat = {
 				var maxLength = $(this).attr("maxlength");  
 				var length    = text.length;
 				if (length <= maxLength + 1){ 
-					Chat.nick = $(this).val();
+					Chat.nickname = $(this).val();
 					$('#nick-wrap').fadeOut();
 					$('#chat').focus();
 				}
@@ -100,6 +103,9 @@ Chat = {
 		 	$.ajax({
 				type: "POST",
 				url : "chat/getState",
+			   	data: {  
+			   		'type' : Chat.getChatType(),
+				},
 			   	dataType: "json",
 			   	success: function(data){
 				   Chat.state    = data.state;
@@ -112,15 +118,12 @@ Chat = {
 	history: function(){
 		if(!Chat.instanse){
 			Chat.instanse = true;
-			var file = "php";
-			if(Chat.nodejs)
-				file = "nodejs"
 	     	$.ajax({
 				type: "POST",
 			   	url : "chat/getHistory",
 			   	data: {  
 			   		'state'    : Chat.state,
-			   		'file'     : file
+			   		'type'     : Chat.getChatType()
 				},
 			   	dataType: "json",
 			   	success: function(data){
@@ -128,11 +131,10 @@ Chat = {
 			   		var obj     = $('#chat-area');
 					if(data.text){
 						for(var i = 0; i < data.text.length; i++){
-                        	obj.append($("<p>"+ Emoticons.replace(data.text[i]) + "</p>"));
+                        	obj.append($("<p>"+ Emoticons.replaces(data.text[i]) + "</p>"));
                         }								  
 				   	}
-				   	if(newMsgs)
-				   		document.getElementById('chat-area').scrollTop = document.getElementById('chat-area').scrollHeight;
+				   	document.getElementById('chat-area').scrollTop = document.getElementById('chat-area').scrollHeight;
 				   	Chat.instanse = false;
 			   	},
 			});
@@ -156,10 +158,15 @@ Chat = {
 							for(var i = 0; i < data.text.length; i++) {
 								newMsgs = true;
 								text = data.text[i];
-	                        	obj.append($("<p>" + Emoticons.replace(data.text[i]) + "</p>"));
 	                        	var index_cut = text.lastIndexOf('</span>');
 	                        	var only_text = text.slice(index_cut+7, text.length-1);
-	                        	Commands.check(only_text, obj);
+	                        	var index_cut_nick = text.lastIndexOf('<span class="span-chat">');
+	                        	var aux = text.slice(index_cut_nick+24, text.length-1);
+	                        	var only_nick = aux.slice(0, aux.indexOf('</span>'))
+								if(!Commands.isCommand(only_text))
+	                        		obj.append($("<p>" + Emoticons.replaces(data.text[i]) + "</p>"));
+	                        	if(only_nick == Chat.nickname)
+									Commands.check(only_text, obj);
 	                        }								  
 					   	}
 					   	if(newMsgs)
@@ -179,7 +186,7 @@ Chat = {
 			   	url : "chat/send",
 			   	data: {  
 						'message'  : message,
-						'nickname' : Chat.nick,
+						'nickname' : Chat.nickname,
 				},
 			   	dataType: "json",
 			   	success: function(data){
@@ -190,7 +197,7 @@ Chat = {
     	else{
     		NodeClient.emit({
     			'message'  : message,
-    			'nickname' : Chat.nick
+    			'nickname' : Chat.nickname
     		})
     	}
 	}

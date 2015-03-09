@@ -6,7 +6,7 @@ h2                              { color: #fa9f00; font: 30px Helvetica, Sans-Ser
 
 #chat-wrap                      { border: 1px solid #eee; margin: 0 0 15px 0; }
 #chat-area                      { overflow: auto; padding: 30px; background: #DCDCDC; padding-top: 40px; padding-bottom: 40px; }
-#chat-area p                    { padding-top: 15px; padding-bottom: 10px; border-bottom: 1px solid #ccc; }
+#chat-area p                    { padding-top: 15px; padding-bottom: 10px; border-bottom: 1px solid #ccc; line-height: 30px; }
 
 #send-message-area p            { float: left; color: white; padding-top: 27px; font-size: 14px; }
 #chat                           { border: 0px; width: 100%; padding-top: 15px; background: #DCDCDC; text-indent: 10px; }
@@ -23,7 +23,7 @@ textarea{
 	height: 100%;
 	width: 100%;
 	position: fixed;
-	background-color: rgba(0,0,0,0.8);
+	background-color: rgba(0,0,0,0.95);
 	top: 0;
 }
 
@@ -37,7 +37,7 @@ textarea{
 }
 
 #nick{
-	width: 100%;
+	width: 277px;
 	height: 30px;
 	border-radius: 5px;
 	border: 2px solid rgb(81, 81, 81);
@@ -47,6 +47,7 @@ textarea{
 	font-size: 180%;
 	margin-top: 89px;
 	color: #ccc;
+	margin-left: 13px;
 }
 
 .date{

@@ -118,7 +118,7 @@ var Emoticons = {
     init: function(){
         $.emoticons.define(Emoticons.definition);
     },
-    replace: function(text){
+    replaces: function(text){
        return $.emoticons.replace(text); 
     }
 }

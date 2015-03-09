@@ -14,6 +14,17 @@ var Commands = {
 		},
 	],
 	admin_name: 'Roboto',
+	isCommand: function(message){
+		for(var i=0; i<Commands.list.length; i++){
+			var list_comands = Commands.list[i].command;
+			for(var j=0; j<list_comands.length; j++){
+				if(Commands.normalize(list_comands[j]) == Commands.normalize(message)){
+					return true;
+				}
+			}
+		}
+		return false;
+	},
 	check: function(message, obj){
 		var date;
 		for(var i=0; i<Commands.list.length; i++){
@@ -48,7 +59,7 @@ var Commands = {
 			for (i in codes){
 				str += " " + codes[i] + " ";
 			}
-			str += " -> " + Emoticons.replace(codes[0]) + " <br/>";
+			str += " -> " + Emoticons.replaces(codes[0]) + " <br/>";
 		}
 		obj.append(str);
 	},
