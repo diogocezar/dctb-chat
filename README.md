@@ -1,6 +1,6 @@
 # Simple Chat
 
-This is a simple chat created with PHP + JQuery.
+This is a simple chat created with PHP + NodeJS + JQuery.
 
 Does not use database.
 
