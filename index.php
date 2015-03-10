@@ -31,7 +31,7 @@
     <script src="js/node_modules/socket.io/node_modules/socket.io-client/dist/socket.io.js"></script>
     <script src="js/objects/public/util.js"></script>
     <script src="js/objects/public/emoticons.js"></script>
-    <script src="js/objects/public/commands.js"></script>
     <script src="js/objects/public/nodeClient.js"></script>
+    <script src="js/objects/public/commands.js"></script>
     <script src="js/objects/public/chat.js"></script>
 </html>

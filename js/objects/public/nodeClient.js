@@ -30,6 +30,18 @@ NodeClient = {
 			obj.append('<p><span class="span-chat date admin">' + date + '</span> <span class="span-chat admin">' + data.nickname + '</span> ' + data.message + '</p>');
 			document.getElementById('chat-area').scrollTop = document.getElementById('chat-area').scrollHeight;
 		});
+		NodeClient.socket.on('users', function(data){
+			var nickname = data.nickname;
+			if(nickname == Chat.nickname){
+				var users = data.users;
+				var print_users = "";
+				var date = Util.getDate();
+				for(var i=0;i<users.length;i++)
+					print_users += "<strong>@" + users[i] + "</strong> ";
+				obj.append('<p><span class="span-chat date admin">' + date + '</span> <span class="span-chat admin">' + data.nickname_admin +'</span> ' + print_users + '</p>');
+				document.getElementById('chat-area').scrollTop = document.getElementById('chat-area').scrollHeight;
+			}
+		});
 		NodeClient.socket.on('message', function(data){
 			NodeClient.save(data.nickname, data.message);
 			var date = Util.getDate();

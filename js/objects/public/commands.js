@@ -2,7 +2,7 @@ var Commands = {
 	list: [
 		{
 			'command' : ['/?','/help'],
-			'text'    : '<br/><br/><strong>Esta é a ajuda do chat.</strong><br/><br/>Comandos:<br/><br/><strong>[/smiles,/emoticons,/emotions]</strong> -> Mostra opções de emotions;<br/><strong>[/?,/help]</strong> -> Mostra os comandos; <br/> <strong>[/clear]</strong> -> Limpa a tela;'
+			'text'    : '<br/><br/><strong>Esta é a ajuda do chat.</strong><br/><br/>Comandos:<br/><br/><strong>[/smiles,/emoticons,/emotions]</strong> -> Mostra opções de emotions;<br/><strong>[/?,/help]</strong> -> Mostra os comandos; <br/> <strong>[/clear]</strong> -> Limpa a tela; <br/> <strong>[/users]</strong> -> Lista os usuários do chat;'
 		},
 		{
 			'command' : ['/smiles', '/emoticons', '/emotions'], 
@@ -12,8 +12,12 @@ var Commands = {
 			'command' : ['/clear'],
 			'action'  : 'clear'
 		},
+		{
+			'command' : ['/users'],
+			'action'  : 'users'
+		}
 	],
-	admin_name: 'Roboto',
+	admin: 'Roboto',
 	isCommand: function(message){
 		for(var i=0; i<Commands.list.length; i++){
 			var list_comands = Commands.list[i].command;
@@ -35,11 +39,12 @@ var Commands = {
 				if(Commands.normalize(list_comands[j]) == Commands.normalize(message)){
 					if(!action){
 						date = Util.getDate();
-						obj.append('<p><span class="span-chat date admin">' + date + '</span> <span class="span-chat admin">' + Commands.admin_name + '</span> ' + text + '</p>');
+						obj.append('<p><span class="span-chat date admin">' + date + '</span> <span class="span-chat admin">' + Commands.admin + '</span> ' + text + '</p>');
 					}
 					else{
 						if(action == 'clear'){ Commands.clear(obj)}
 						if(action == 'list_smiles'){ Commands.list_smiles(obj)}
+						if(action == 'users'){Commands.users()}
 					}
 				}
 			}
@@ -51,7 +56,7 @@ var Commands = {
 	list_smiles: function(obj){
 		str = "";
 		var date = Util.getDate();
-		str += '<p><span class="span-chat date admin">' + date + '</span> <span class="span-chat admin">' + Commands.admin_name + '</span> ';
+		str += '<p><span class="span-chat date admin">' + date + '</span> <span class="span-chat admin">' + Commands.admin + '</span> ';
 		str += "<br/><br/>"
 		var emotions = Emoticons.definition;
 		for (name in emotions){
@@ -62,6 +67,9 @@ var Commands = {
 			str += " -> " + Emoticons.replaces(codes[0]) + " <br/>";
 		}
 		obj.append(str);
+	},
+	users: function(){
+		NodeClient.socket.emit('users', {nickname:Chat.nickname});
 	},
 	normalize: function(text){
 		return text.replace(/(\r\n|\n|\r)/gm,"");
