@@ -5,7 +5,7 @@
 *   Year: 2015
 */
 NodeClient = {
-	host   : 'diogocezar.com.br',
+	host   : '11.1.1.40',
 	port   : '8080',
 	socket : null,
 	init : function(){
@@ -15,6 +15,21 @@ NodeClient = {
 		NodeClient.socket.emit('message', obj);
 	},
 	on : function(obj){
+		NodeClient.socket.on('connect', function(){
+			NodeClient.socket.emit('chat_connection', {nickname : Chat.nickname});
+		});
+		NodeClient.socket.on('welcome', function(data){
+			NodeClient.save(data.nickname, data.message);
+			var date = Util.getDate();
+			obj.append('<p><span class="span-chat date admin">' + date + '</span> <span class="span-chat admin">' + data.nickname + '</span> ' + data.message + '</p>');
+			document.getElementById('chat-area').scrollTop = document.getElementById('chat-area').scrollHeight;
+		});
+		NodeClient.socket.on('info', function(data){
+			NodeClient.save(data.nickname, data.message);
+			var date = Util.getDate();
+			obj.append('<p><span class="span-chat date admin">' + date + '</span> <span class="span-chat admin">' + data.nickname + '</span> ' + data.message + '</p>');
+			document.getElementById('chat-area').scrollTop = document.getElementById('chat-area').scrollHeight;
+		});
 		NodeClient.socket.on('message', function(data){
 			NodeClient.save(data.nickname, data.message);
 			var date = Util.getDate();

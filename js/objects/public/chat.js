@@ -8,7 +8,7 @@ Chat = {
 	instanse  : false,
 	state     : 0,
 	nickname  : null,
-	nodejs    : false,
+	nodejs    : true,
 	timeout   : 2000,
 	init: function(){
 		Chat.getNick();
@@ -16,10 +16,6 @@ Chat = {
 		Chat.keys();
 		Chat.setNiceScroll();
 		Chat.getState();
-		if(Chat.nodejs){
-			NodeClient.init();
-			NodeClient.on($('#chat-area'));
-		}
 	},
 	getChatType: function(){
 		if(Chat.nodejs)
@@ -59,6 +55,10 @@ Chat = {
 					Chat.nickname = $(this).val();
 					$('#nick-wrap').fadeOut();
 					$('#chat').focus();
+					if(Chat.nodejs){
+						NodeClient.init();
+						NodeClient.on($('#chat-area'));
+					}
 				}
 				else{
 					$(this).val(text.substring(0, maxLength));
