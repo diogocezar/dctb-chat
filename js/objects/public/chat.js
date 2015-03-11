@@ -8,7 +8,7 @@ Chat = {
 	instanse  : false,
 	state     : 0,
 	user      : {id: null, nickname: null},
-	nodejs    : false,
+	nodejs    : true,
 	timeout   : 2000,
 	init: function(){
 		Chat.getNick();
