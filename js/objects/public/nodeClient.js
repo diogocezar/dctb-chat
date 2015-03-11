@@ -16,11 +16,12 @@ NodeClient = {
 	},
 	on : function(obj){
 		NodeClient.socket.on('connect', function(){
-			NodeClient.socket.emit('chat_connection', {nickname : Chat.nickname});
+			NodeClient.socket.emit('chat_connection', {user : Chat.user});
 		});
 		NodeClient.socket.on('welcome', function(data){
 			NodeClient.save(data.real_nickname, data.message);
-			//Chat.nickname = data.real_nickname;
+			if(Chat.user.id == data.id)
+				Chat.user.nickname = data.real_nickname;
 			var date = Util.getDate();
 			obj.append('<p><span class="span-chat date admin">' + date + '</span> <span class="span-chat admin">' + data.admin_nickname + '</span> ' + data.message + '</p>');
 			document.getElementById('chat-area').scrollTop = document.getElementById('chat-area').scrollHeight;
@@ -33,7 +34,7 @@ NodeClient = {
 		});
 		NodeClient.socket.on('users', function(data){
 			var nickname = data.nickname;
-			if(nickname == Chat.nickname){
+			if(nickname == Chat.user.nickname){
 				var users = data.users;
 				var print_users = "";
 				var date = Util.getDate();
@@ -52,7 +53,7 @@ NodeClient = {
 			text = Emoticons.replaces(text);
 			if(!Commands.isCommand(text))
 				obj.append('<p><span class="span-chat date">' + date + '</span> <span class="span-chat">' + nickname + '</span> ' + text + '</p>');
-			if(nickname == Chat.nickname)
+			if(nickname == Chat.user.nickname)
 				Commands.check(data.message, obj);
 			document.getElementById('chat-area').scrollTop = document.getElementById('chat-area').scrollHeight;
 

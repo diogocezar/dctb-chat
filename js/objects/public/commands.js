@@ -44,7 +44,7 @@ var Commands = {
 					else{
 						if(action == 'clear'){ Commands.clear(obj)}
 						if(action == 'list_smiles'){ Commands.list_smiles(obj)}
-						if(action == 'users'){Commands.users()}
+						if(action == 'users'){Commands.users(obj)}
 					}
 				}
 			}
@@ -68,8 +68,12 @@ var Commands = {
 		}
 		obj.append(str);
 	},
-	users: function(){
-		NodeClient.socket.emit('users', {nickname:Chat.nickname});
+	users: function(obj){
+		if(Chat.nodejs)
+			NodeClient.socket.emit('users', {nickname:Chat.user.nickname});
+		else
+			date = Util.getDate();
+			obj.append('<p><span class="span-chat date admin">' + date + '</span> <span class="span-chat admin">' + Commands.admin + '</span>Comando disponível apenas com NodeJS.</p>');
 	},
 	normalize: function(text){
 		return text.replace(/(\r\n|\n|\r)/gm,"");

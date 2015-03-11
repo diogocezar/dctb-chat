@@ -7,8 +7,8 @@
 Chat = {
 	instanse  : false,
 	state     : 0,
-	nickname  : null,
-	nodejs    : true,
+	user      : {id: null, nickname: null},
+	nodejs    : false,
 	timeout   : 2000,
 	init: function(){
 		Chat.getNick();
@@ -51,8 +51,9 @@ Chat = {
 				var text      = $(this).val();
 				var maxLength = $(this).attr("maxlength");  
 				var length    = text.length;
-				if (length <= maxLength + 1){ 
-					Chat.nickname = $(this).val();
+				if (length <= maxLength + 1){
+					Chat.user.nickname = $(this).val();
+					Chat.user.id = Util.getId();
 					$('#nick-wrap').fadeOut();
 					$('#chat').focus();
 					if(Chat.nodejs){
@@ -164,7 +165,7 @@ Chat = {
 	                        	var only_nick = aux.slice(0, aux.indexOf('</span>'))
 								if(!Commands.isCommand(only_text))
 	                        		obj.append($("<p>" + Emoticons.replaces(data.text[i]) + "</p>"));
-	                        	if(only_nick == Chat.nickname)
+	                        	if(only_nick == Chat.user.nickname)
 									Commands.check(only_text, obj);
 	                        }								  
 					   	}
@@ -185,7 +186,7 @@ Chat = {
 			   	url : "chat/send",
 			   	data: {  
 						'message'  : message,
-						'nickname' : Chat.nickname,
+						'nickname' : Chat.user.nickname,
 				},
 			   	dataType: "json",
 			   	success: function(data){
@@ -196,7 +197,7 @@ Chat = {
     	else{
     		NodeClient.emit({
     			'message'  : message,
-    			'nickname' : Chat.nickname
+    			'nickname' : Chat.user.nickname
     		})
     	}
 	}
