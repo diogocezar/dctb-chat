@@ -62,7 +62,6 @@ Chat = {
 				}
 				else{
 					$(this).val(text.substring(0, maxLength));
-
 				}	
 			}	
 		});

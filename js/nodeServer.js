@@ -20,15 +20,33 @@ NodeServer = {
 		NodeServer.io     = NodeServer.socket.listen(NodeServer.server);
 		NodeServer.go();
 	},
+	check_exists: function(nickname){
+		var j = 1;
+		for(var i=0;i<NodeServer.allClients.length; i++){
+			while(nickname == NodeServer.allClients[i].nickname){
+				var iof = nickname.indexOf('_');
+				if(iof != -1){
+					var just_nick = nickname.slice(0, iof);
+					nickname = just_nick + "_" + j;
+				}
+				else{
+					nickname = nickname + "_" + j;
+				}
+				j++;
+			}
+		}
+		return nickname;
+	},
 	go : function(){
 		NodeServer.io.sockets.on('connection', function(client){
 			NodeServer.allClients.push(client);
 			client.on("chat_connection", function(data){
 				var i = NodeServer.allClients.indexOf(client);
-				NodeServer.allClients[i].nickname = data.nickname;
-				console.log("[" + data.nickname + "] entrou no chat.");
+				var real_nickname = NodeServer.check_exists(data.nickname);
+				NodeServer.allClients[i].nickname = real_nickname;
+				console.log("[" + real_nickname + "] entrou no chat.");
 				console.log("Existem" + NodeServer.allClients.length + " pessoa(s) conectadas.");
-				NodeServer.io.sockets.emit("welcome", { nickname: NodeServer.admin, message: "<strong>" + data.nickname + "</strong> entrou no chat." });
+				NodeServer.io.sockets.emit("welcome", { nickname: NodeServer.admin, message: "<strong>" + real_nickname + "</strong> entrou no chat." });
 				NodeServer.io.sockets.emit("info", { nickname: NodeServer.admin, message: "Existem <strong>" + NodeServer.allClients.length + "</strong> pessoa(s) conectadas." });
 			});
 			client.on("users", function(data){

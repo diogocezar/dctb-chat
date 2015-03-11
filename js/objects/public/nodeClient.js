@@ -19,9 +19,10 @@ NodeClient = {
 			NodeClient.socket.emit('chat_connection', {nickname : Chat.nickname});
 		});
 		NodeClient.socket.on('welcome', function(data){
-			NodeClient.save(data.nickname, data.message);
+			NodeClient.save(data.real_nickname, data.message);
+			//Chat.nickname = data.real_nickname;
 			var date = Util.getDate();
-			obj.append('<p><span class="span-chat date admin">' + date + '</span> <span class="span-chat admin">' + data.nickname + '</span> ' + data.message + '</p>');
+			obj.append('<p><span class="span-chat date admin">' + date + '</span> <span class="span-chat admin">' + data.admin_nickname + '</span> ' + data.message + '</p>');
 			document.getElementById('chat-area').scrollTop = document.getElementById('chat-area').scrollHeight;
 		});
 		NodeClient.socket.on('info', function(data){
@@ -38,7 +39,7 @@ NodeClient = {
 				var date = Util.getDate();
 				for(var i=0;i<users.length;i++)
 					print_users += "<strong>@" + users[i] + "</strong> ";
-				obj.append('<p><span class="span-chat date admin">' + date + '</span> <span class="span-chat admin">' + data.nickname_admin +'</span> ' + print_users + '</p>');
+				obj.append('<p><span class="span-chat date admin">' + date + '</span> <span class="span-chat admin">' + data.admin_nickname +'</span> ' + print_users + '</p>');
 				document.getElementById('chat-area').scrollTop = document.getElementById('chat-area').scrollHeight;
 			}
 		});
